@@ -1,0 +1,15 @@
+//package com.clinicasorridente1.apisorridente.repository;
+//
+//import com.clinicasorridente1.apisorridente.entity.Paciente;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.stereotype.Component;
+//
+//@Component
+//public class PacienteRepository implements IPacienteRepository<Paciente, Integer> {
+//
+//    @Autowired
+//    private EnderecoRepository enderecoRepository;
+//
+//
+//
+//}

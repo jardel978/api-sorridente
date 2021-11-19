@@ -1,0 +1,33 @@
+//package com.clinicasorridente1.apisorridente.repository;
+//
+//import com.clinicasorridente1.apisorridente.exception.NoDataException;
+//import org.springframework.data.jpa.repository.JpaRepository;
+//
+//import java.util.List;
+//import java.util.Optional;
+//
+//public class GenericRepository<T, K> implements IGenericRepository<T, K> {
+//
+//    private JpaRepository<T, K> jpaRepository;
+//
+//    @Override
+//    public T salvar(T entidade) {
+//        jpaRepository.save(entidade);
+//        return entidade;
+//    }
+//
+//    @Override
+//    public Optional<T> buscarPorId(K id) {
+//        return jpaRepository.findById(id);
+//    }
+//
+//    @Override
+//    public List<T> buscarTodos() {
+//        return jpaRepository.findAll();
+//    }
+//
+//    @Override
+//    public void excluirPorId(K id) {
+//        jpaRepository.deleteById(id);
+//    }
+//}
