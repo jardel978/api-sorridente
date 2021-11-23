@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -32,7 +33,7 @@ public class Dentista implements Serializable {
     @Column(name = "sobrenome_dentista")
     private String sobrenome;
 
-    @OneToOne(mappedBy = "dentista")
-    private Consulta consulta;
+    @OneToMany(mappedBy = "dentista")
+    private List<Consulta> consulta;
 
 }

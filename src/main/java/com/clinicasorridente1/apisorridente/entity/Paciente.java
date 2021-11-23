@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.Date;
 
 @Data //annotation do Lombok para gerar geters, setters e toString
 @AllArgsConstructor // Lombok para gerar construtor com todos os atributos da classe Paciente
@@ -33,18 +34,20 @@ public class Paciente implements Serializable {
     @Column(name = "rg_paciente")
     private String rg;
 
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "data_cadastro_paciente")
-    private Calendar dataCadastro;
+    private Date dataCadastro = new Date(System.currentTimeMillis());
 
     @Column(name = "genero_paciente")
+    @Enumerated(value = EnumType.STRING)
     private Genero genero;
 
     @Transient // indica que esse atributo não irá para o banco de dados
     private Integer idade;
 
-    @OneToOne
-    @JoinColumn(name = "id_endereco", nullable = false, unique = true, foreignKey = @ForeignKey(name = "fk_endereco"))
+    @ManyToOne(cascade = CascadeType.ALL)// cascade.all para que uma operação feita no paciente seja feita no seu
+    // respectivo endereço
+    @JoinColumn(name = "id_endereco", unique = true, foreignKey = @ForeignKey(name = "fk_endereco"))
     private Endereco endereco;
 
     @OneToOne(mappedBy = "paciente") //fazendo o relacionamento bidirecional com consulta. O mappedBy informa que

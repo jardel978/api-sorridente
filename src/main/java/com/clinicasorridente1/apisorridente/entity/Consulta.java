@@ -8,12 +8,14 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.Date;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Entity
+@Table(name = "TB_CONSULTA")
 @SequenceGenerator(name = "consulta", sequenceName = "SQ_TB_CONSULTA", allocationSize = 1)
 public class Consulta implements Serializable {
 
@@ -30,12 +32,15 @@ public class Consulta implements Serializable {
     // um atributo do tipo dessa classe "Consulta" na classe de onde vem a FK, nesse caso: "Paciente")
     private Paciente paciente;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_dentista", nullable = false, unique = true, foreignKey = @ForeignKey(name = "fk_dentista"))
     private Dentista dentista;
 
-    @Temporal(TemporalType.DATE)
+ /*   private Usuario usuario;*/
+
+
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "data_consulta")
-    private Calendar data;
+    private Date dataConsulta = new Date(System.currentTimeMillis());
 
 }

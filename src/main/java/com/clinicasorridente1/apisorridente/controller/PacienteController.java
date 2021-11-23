@@ -1,7 +1,7 @@
 package com.clinicasorridente1.apisorridente.controller;
 
-import com.clinicasorridente1.apisorridente.entity.Endereco;
 import com.clinicasorridente1.apisorridente.entity.Paciente;
+import com.clinicasorridente1.apisorridente.service.EnderecoService;
 import com.clinicasorridente1.apisorridente.service.PacienteService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController()
 @RequestMapping("/paciente")
@@ -19,8 +18,8 @@ public class PacienteController {
     @Autowired
     private PacienteService pacienteService;
 
-//    @Autowired
-//    private EnderecoService enderecoService;
+    @Autowired
+    private EnderecoService enderecoService;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -35,7 +34,8 @@ public class PacienteController {
     @ResponseStatus(HttpStatus.OK)
     public Paciente buscarPorId(@PathVariable("id") Integer id) {
         return pacienteService.buscarPorId(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
-                "Paciente não encontrado"));
+                "Paciente não encontrado")
+        );
     }
 
     @GetMapping
@@ -52,7 +52,8 @@ public class PacienteController {
                     pacienteService.excluirPorId(paciente.getId());
                     return Void.TYPE;
                 }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
-                        "Paciente não encontrado"));
+                        "Paciente não encontrado")
+                );
     }
 
     @PutMapping("/{id}")
@@ -62,11 +63,13 @@ public class PacienteController {
                 .map((pacienteDaBase) -> {
                     modelMapper.map(paciente, pacienteDaBase);
                     pacienteService.salvar(pacienteDaBase);
-//                    modelMapper.map(paciente.getEndereco(), enderecoDaBase);
-//                    enderecoService.savar(enderecoDaBase);
+
+//                    modelMapper.map(paciente.getEndereco(), pacienteDaBase.getEndereco());
+//                    enderecoService.salvar(pacienteDaBase.getEndereco());
                     return Void.TYPE;
                 }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
-                        "Paciente não encontrado"));
+                        "Paciente não encontrado")
+                );
     }
 
 }

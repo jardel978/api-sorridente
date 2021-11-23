@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import javax.naming.Name;
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -40,7 +41,7 @@ public class Endereco implements Serializable {
     private String estado;
 
     @JsonIgnore // para evitar um cíclo de criação de endereços e pacientes (não serializar esse atributo)
-    @OneToOne(mappedBy = "endereco")
-    private Paciente paciente;
+    @OneToMany(mappedBy = "endereco")
+    private List<Paciente> paciente;
 
 }

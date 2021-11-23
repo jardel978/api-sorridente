@@ -19,7 +19,7 @@ public class PacienteService {
     private IEnderecoRepository enderecoRepository;
 
     public Paciente salvar(Paciente paciente) {
-        enderecoRepository.save(paciente.getEndereco());
+//        enderecoRepository.save(paciente.getEndereco());
         return pacienteRepository.save(paciente);
     }
 
